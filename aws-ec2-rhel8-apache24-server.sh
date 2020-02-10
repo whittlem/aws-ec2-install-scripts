@@ -1,5 +1,7 @@
 #/bin/bash
 
+yum install gcc make -y
+
 cd ~
 https://libexpat.github.io
 wget https://github.com/libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.gz
@@ -84,3 +86,5 @@ netstat -antup | grep -i 8080
 
 echo "" >> /etc/sudoers
 echo "%www    ALL=(ALL)       NOPASSWD:/usr/sbin/service" >> /etc/sudoers
+
+yum remove gcc make openssl-devel pcre-devel zlib-devel -y
