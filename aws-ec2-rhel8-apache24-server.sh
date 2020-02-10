@@ -65,8 +65,11 @@ sed -i 's/^Group daemon\s*$/Group wwwrun/' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's/^Listen 80$/Listen 8080/' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~^#LoadModule proxy_http_module modules/mod_proxy_http.so~LoadModule proxy_http_module modules/mod_proxy_http.so~' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~^#LoadModule proxy_module modules/mod_proxy.so~LoadModule proxy_module modules/mod_proxy.so~' /opt/SP/apache-2.4/conf/httpd.conf
+sed -i 's~/opt/SP/apache-2.4/htdocs~/var/SP/httpd/htdocs~g' /opt/SP/apache-2.4/conf/httpd.conf
 
+ln -s /opt/SP/apache-2.4 /opt/apache-2.4
 ln -s /opt/SP/apache-2.4 /opt/SP/apache
+chown -R wwwadm:www /opt/SP/apache-2.4
 
 sed -i 's~PATH=$PATH:$HOME/bin~export PATH=$PATH:$HOME/bin~' ~/.bash_profile
 sed -i '/^export PATH$/d' .bash_profile
@@ -76,6 +79,10 @@ echo 'export PATH=$PATH:/opt/SP/apache/bin' >> ~/.bash_profile
 chown -R wwwadm:www /opt/SP/apache-2.4
 chmod +s /opt/SP/apache-2.4
 cd ~
+
+mkdir -p /var/SP/httpd
+chown -R wwwadm:www /var/SP/httpd
+mv /opt/SP/apache-2.4/htdocs /var/SP/httpd
 
 cp ~/aws-ec2-install-scripts/assets/services/apache /etc/init.d
 chown root:root /etc/init.d/apache 
