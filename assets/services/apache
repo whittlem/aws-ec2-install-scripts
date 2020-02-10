@@ -1,0 +1,34 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          apache
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: apache
+# Description: Start apache
+### END INIT INFO
+
+case "$1" in
+start)
+    echo "Starting Apache ..."
+    /opt/SP/apache-2.4/bin/apachectl start
+;;
+stop)
+    echo "Stopping Apache ..."
+    /opt/SP/apache-2.4/bin/apachectl stop
+;;
+graceful)
+    echo "Restarting Apache gracefully..."
+    /opt/SP/apache-2.4/bin/apachectl graceful
+;;
+restart)
+    echo "Restarting Apache ..."
+    /opt/SP/apache-2.4/bin/apachectl restart
+;;
+*)
+    echo "Usage: '$0' {start|stop|restart|graceful}"
+    exit 64
+;;
+esac
+exit 0
