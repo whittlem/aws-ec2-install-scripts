@@ -9,7 +9,7 @@ wget https://github.com/libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.
 tar -zxvf expat-2.2.9.tar.gz
 cd expat-2.2.9
 ./configure --prefix=/opt/SP/expat-2.2.9
-make && make install
+make clean && make && make install
 
 # https://github.com/nghttp2/nghttp2/releases
 cd ~
