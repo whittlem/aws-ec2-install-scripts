@@ -1,5 +1,8 @@
 #/usr/bin/bash
 
+yum repolist all
+yum-config-manager --enable codeready-builder-for-rhel-8-rhui-rpms
+
 yum update -y
 yum install git unzip wget -y
 
