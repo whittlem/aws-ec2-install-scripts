@@ -86,7 +86,7 @@ sed -i 's/^Group daemon\s*$/Group wwwrun/' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's/^Listen 80$/Listen 8080/' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~^#LoadModule proxy_http_module modules/mod_proxy_http.so~LoadModule proxy_http_module modules/mod_proxy_http.so~' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~^#LoadModule proxy_module modules/mod_proxy.so~LoadModule proxy_module modules/mod_proxy.so~' /opt/SP/apache-2.4/conf/httpd.conf
-sed -i 's~/opt/SP/apache-2.4/htdocs~/var/SP/httpd/htdocs~g' /opt/SP/apache-2.4/conf/httpd.conf
+sed -i 's~/opt/apache-2.4/htdocs~/var/SP/httpd/htdocs~g' /opt/SP/apache-2.4/conf/httpd.conf
 
 sed -i 's~PATH=$PATH:$HOME/bin~export PATH=$PATH:$HOME/bin~' ~/.bash_profile
 sed -i '/^export PATH$/d' .bash_profile
