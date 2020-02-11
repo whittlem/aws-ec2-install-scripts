@@ -3,6 +3,14 @@
 yum update -y
 yum install gcc make -y
 
+# https://libexpat.github.io
+cd ~
+wget https://github.com/libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.gz
+tar -zxvf expat-2.2.9.tar.gz
+cd expat-2.2.9
+./configure --prefix=/opt/SP/expat-2.2.9
+make && make install
+
 # https://github.com/nghttp2/nghttp2/releases
 cd ~
 wget https://github.com/nghttp2/nghttp2/releases/download/v1.40.0/nghttp2-1.40.0.tar.gz
@@ -19,12 +27,19 @@ cd apr-1.7.0
 ./configure --prefix=/opt/SP/apr-1.7.0
 make clean && make && make install
 
+yum install openldap-devel -y
+
 # https://apr.apache.org/download.cgi
 cd ~
 wget http://www.mirrorservice.org/sites/ftp.apache.org//apr/apr-util-1.6.1.tar.gz
 tar -zxvf apr-util-1.6.1.tar.gz
 cd apr-util-1.6.1
-./configure --prefix=/opt/SP/apr-util-1.6.1 --with-apr=/opt/SP/apr-1.7.0 --with-expat=/opt/SP/expat-2.2.9
+./configure --prefix=/opt/SP/apr-util-1.6.1 \
+--with-apr=/opt/SP/apr-1.7.0 \
+--with-expat=/opt/SP/expat-2.2.9 \
+--with-ldap \
+--with-ldap-lib=/usr/lib64 \
+--with-ldap-include=/etc/openldap
 make clean && make && make install
 
 yum install openssl-devel pcre-devel zlib-devel -y
@@ -41,6 +56,7 @@ cd httpd-2.4.41
 --enable-nonportable-atomics=yes \
 --with-devrandom=/dev/urandom \
 --with-ldap \
+--enable-authnz-ldap \
 --with-crypto \
 --with-gdbm \
 --with-ssl \
@@ -89,4 +105,4 @@ netstat -antup | grep -i 8080
 echo "" >> /etc/sudoers
 echo "%www    ALL=(ALL)       NOPASSWD:/usr/sbin/service" >> /etc/sudoers
 
-yum remove gcc make openssl-devel pcre-devel zlib-devel -y
+yum remove gcc make openldap-devel openssl-devel pcre-devel zlib-devel -y
