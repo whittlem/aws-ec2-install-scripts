@@ -1,0 +1,60 @@
+#!/bin/bash
+ 
+### BEGIN INIT INFO
+# Provides:          php
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts php daemon
+# Description:       starts php daemon
+### END INIT INFO
+
+CONFIG=/opt/SP/php-7.3.14/etc/php-fpm.conf
+DAEMON=/opt/SP/php-7.3.14/sbin/php-fpm
+DESC="php-fpm daemon"
+PID=/opt/SP/php-7.3.14/var/run/php-fpm.pid
+
+test -x $DAEMON || exit 0
+test -d $CONFIG_DIR || exit 0
+
+function start {
+    $DAEMON -c $CONFIG
+}
+
+function stop {
+    kill `cat $PID 2>/dev/null` &> /dev/null
+}
+
+kill -0 `cat $PID 2>/dev/null` &> /dev/null
+running=$?
+case $1 in
+start)
+    if [ 0 -eq $running ]; then
+        echo "php-fpm daemon is already running"
+        exit
+    fi
+    start && echo "php-fpm daemon started"
+;;
+stop)
+    if [ 0 -ne $running ]; then
+        echo "php-fpm daemon is not running"
+        exit
+    fi
+    stop && echo "php-fpm daemon was stopped"
+;;
+restart)
+    stop && start;
+    echo "php-fpm daemon restarted"
+;;
+status)
+    if [ 0 -eq $running ]; then
+        echo "php-fpm daemon is running"
+    else
+        echo "php-fpm daemon is not running"
+    fi
+;;
+*)
+    echo "$0 [start|stop|restart|status]"
+;;
+esac

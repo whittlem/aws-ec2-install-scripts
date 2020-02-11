@@ -94,7 +94,7 @@ ldapadd -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -f doej.ldif
 
 ${LDAPADM_PASSWD} -s jjoe -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -x "uid=doej,ou=Users,$SLAPD_OLCSUFFIX"
 
-ldapsearch -x -cn doej -b $SLAPD_OLCSUFFIX
+ldapsearch -x -cn=doej -b $SLAPD_OLCSUFFIX
 
 #ldapdelete -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} "uid=doej,ou=Users,$SLAPD_OLCSUFFIX"
 
