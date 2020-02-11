@@ -10,6 +10,8 @@ tar -zxvf expat-2.2.9.tar.gz
 cd expat-2.2.9
 ./configure --prefix=/opt/SP/expat-2.2.9
 make clean && make && make install
+echo "/opt/SP/expat-2.2.9/lib" >> /etc/ld.so.conf
+ldconfig
 
 # https://github.com/nghttp2/nghttp2/releases
 cd ~
@@ -18,6 +20,8 @@ tar -zxvf nghttp2-1.40.0.tar.gz
 cd nghttp2-1.40.0
 ./configure --prefix=/opt/SP/nghttp2-1
 make clean && make && make install
+echo "/opt/SP/nghttp2-1/lib" >> /etc/ld.so.conf
+ldconfig
 
 # https://apr.apache.org/download.cgi
 cd ~
@@ -26,6 +30,8 @@ tar -zxvf apr-1.7.0.tar.gz
 cd apr-1.7.0
 ./configure --prefix=/opt/SP/apr-1.7.0
 make clean && make && make install
+echo "/opt/SP/apr-1.7.0/lib" >> /etc/ld.so.conf
+ldconfig
 
 yum install openldap-devel -y
 
@@ -41,7 +47,6 @@ cd apr-util-1.6.1
 --with-ldap-lib=/usr/lib64 \
 --with-ldap-include=/etc/openldap
 make clean && make && make install
-
 echo "/opt/SP/apr-util-1.6.1/lib" >> /etc/ld.so.conf
 ldconfig
 
