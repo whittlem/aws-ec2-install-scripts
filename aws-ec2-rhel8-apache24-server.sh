@@ -42,6 +42,9 @@ cd apr-util-1.6.1
 --with-ldap-include=/etc/openldap
 make clean && make && make install
 
+echo "/opt/SP/apr-util-1.6.1/lib" >> /etc/ld.so.conf
+ldconfig
+
 yum install openssl-devel pcre-devel zlib-devel -y
 
 # https://httpd.apache.org/download.cgi#apache24
