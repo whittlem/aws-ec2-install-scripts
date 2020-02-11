@@ -71,7 +71,12 @@ cd php-7.3.14
 --quiet
 make clean && make && make install
 
-echo 'export PATH=$PATH:/opt/SP/php-7.3.14/bin' >> ~/.bash_profile
+ln -s /opt/SP/php-7.3.14 /opt/SP/php7
+
+echo 'export PATH=$PATH:/opt/SP/php7/bin' >> ~/.bash_profile
+echo 'export PATH=$PATH:/opt/SP/php7/bin' >> ~/.bash_profile
+echo 'export PHP_HOME=/opt/SP/php7' >> ~/.bash_profile
+echo 'export PHP_INI_SCAN_DIR=/opt/SP/php7/etc' >> ~/.bash_profile
 cd ~
 source .bash_profile
 
@@ -92,6 +97,6 @@ chmod 611 /etc/init.d/php
 chkconfig php on
 service php start
 
-netstat -antup | grep -i 7000
+netstat -antup | grep -i 9000
 
 yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel -y
