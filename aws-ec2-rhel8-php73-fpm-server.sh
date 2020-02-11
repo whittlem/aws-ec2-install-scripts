@@ -68,6 +68,7 @@ cd php-7.3.14
 --with-libdir=lib64 \
 --enable-mbstring \
 --with-pcre-regex \
+--with-oci8=shared,$ORACLE_HOME \
 --quiet
 make clean && make && make install
 
