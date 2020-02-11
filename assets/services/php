@@ -10,7 +10,7 @@
 # Description:       starts php daemon
 ### END INIT INFO
 
-CONFIG=/opt/SP/php-7.3.14/etc/php-fpm.conf
+CONFIG=/opt/SP/php-7.3.14/etc/php.ini
 DAEMON=/opt/SP/php-7.3.14/sbin/php-fpm
 DESC="php-fpm daemon"
 PID=/opt/SP/php-7.3.14/var/run/php-fpm.pid

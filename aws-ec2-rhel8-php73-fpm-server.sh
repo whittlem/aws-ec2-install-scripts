@@ -71,13 +71,20 @@ cd php-7.3.14
 --quiet
 make clean && make && make install
 
+echo 'export PATH=$PATH:/opt/SP/php-7.3.14/bin' >> ~/.bash_profile
+cd ~
+source .bash_profile
+
 ## ORACLE ###
 cd /opt/SP/php-7.3.14/bin
-pecl channel-update pecl.php.net
-printf "instantclient,/opt/SP/instantclient_12_1\n" | pecl install oci8-2.2.0
-ln -s libclntsh.so.12.1 libclntsh.so
+./pecl channel-update pecl.php.net
+printf "instantclient,/opt/SP/instantclient_12_1\n" | ./pecl install oci8-2.2.0
+ln -s /opt/SP/instantclient_12_1/libclntsh.so.12.1 /opt/SP/instantclient_12_1/libclntsh.so
 echo "extension=oci8.so" >> /opt/SP/php-7.3.14/etc/php.ini
 ##
+
+mv /opt/SP/php-7.3.14/etc/php-fpm.conf.default /opt/SP/php-7.3.14/etc/php-fpm.conf
+mv /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf.default /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
 
 cp ~/aws-ec2-install-scripts/assets/services/php /etc/init.d
 chown root:root /etc/init.d/php
