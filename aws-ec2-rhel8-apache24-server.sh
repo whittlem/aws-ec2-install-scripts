@@ -3,12 +3,12 @@
 yum update -y
 yum install gcc make -y
 
+# https://github.com/nghttp2/nghttp2/releases
 cd ~
-https://libexpat.github.io
-wget https://github.com/libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.gz
-tar -zxvf expat-2.2.9.tar.gz
-cd expat-2.2.9
-./configure --prefix=/opt/SP/expat-2.2.9
+wget https://github.com/nghttp2/nghttp2/releases/download/v1.40.0/nghttp2-1.40.0.tar.gz
+tar -zxvf nghttp2-1.40.0.tar.gz
+cd nghttp2-1.40.0
+./configure --prefix=/opt/SP/nghttp2-1
 make clean && make && make install
 
 # https://apr.apache.org/download.cgi
@@ -34,30 +34,24 @@ cd ~
 wget http://apache.mirror.anlx.net//httpd/httpd-2.4.41.tar.gz
 tar -zxvf httpd-2.4.41.tar.gz
 cd httpd-2.4.41
-./configure -prefix=/opt/SP/apache-2.4 \
+./configure --prefix=/opt/apache-2.4 \
 --with-apr=/opt/SP/apr-1.7.0 \
 --with-apr-util=/opt/SP/apr-util-1.6.1 \
---with-expat=/opt/SP/expat-2.2.9 \
---enable-so \
---enable-deflate \
---enable-expires \
---enable-rewrite \
---enable-ssl \
---disable-autoindex \
---enable-file-cache \
---enable-cache \
---enable-disk-cache \
---enable-mem-cache \
---enable-headers \
---enable-usertrack \
---enable-vhost-alias \
---enable-proxy \
---enable-proxy-ajp \
---enable-proxy-balancer \
---enable-proxy-fcgi \
---enable-proxy-http \
---enable-proxy-connect \
---with-pre
+--libdir=/opt/apache-2.4/lib64 \
+--enable-nonportable-atomics=yes \
+--with-devrandom=/dev/urandom \
+--with-ldap \
+--with-crypto \
+--with-gdbm \
+--with-ssl \
+--enable-mods-shared=all \
+--enable-mpms-shared=all \
+--enable-authnz_fcgi \
+--enable-cgi \
+--enable-pie \
+--enable-http2 \
+--enable-proxy-http2 \
+--with-nghttp2=/opt/SP/nghttp2-1 ac_cv_openssl_use_errno_threadid=yes
 make clean && make && make install
 
 sed -i 's/^User daemon\s*$/User wwwrun/' /opt/SP/apache-2.4/conf/httpd.conf
