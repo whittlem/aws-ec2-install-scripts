@@ -78,16 +78,15 @@ cd httpd-2.4.41
 --with-nghttp2=/opt/SP/nghttp2-1 ac_cv_openssl_use_errno_threadid=yes
 make clean && make && make install
 
+ln -s /opt/apache-2.4 /opt/SP/apache-2.4
+chown -R wwwadm:www /opt/apache-2.4
+
 sed -i 's/^User daemon\s*$/User wwwrun/' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's/^Group daemon\s*$/Group wwwrun/' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's/^Listen 80$/Listen 8080/' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~^#LoadModule proxy_http_module modules/mod_proxy_http.so~LoadModule proxy_http_module modules/mod_proxy_http.so~' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~^#LoadModule proxy_module modules/mod_proxy.so~LoadModule proxy_module modules/mod_proxy.so~' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~/opt/SP/apache-2.4/htdocs~/var/SP/httpd/htdocs~g' /opt/SP/apache-2.4/conf/httpd.conf
-
-ln -s /opt/SP/apache-2.4 /opt/apache-2.4
-ln -s /opt/SP/apache-2.4 /opt/SP/apache
-chown -R wwwadm:www /opt/SP/apache-2.4
 
 sed -i 's~PATH=$PATH:$HOME/bin~export PATH=$PATH:$HOME/bin~' ~/.bash_profile
 sed -i '/^export PATH$/d' .bash_profile
