@@ -79,7 +79,7 @@ echo "dn: ou=ServiceAccounts,$SLAPD_OLCSUFFIX" >> ~/ldapldif/base.ldif
 echo "objectClass: organizationalUnit" >> ~/ldapldif/base.ldif
 echo "ou: ServiceAccounts" >> ~/ldapldif/base.ldif
 
-ldapadd -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -f ~/ldapldif/base.ldif
+ldapadd -x -D "$SLAPD_OLCROOTDN" -w "${LDAPADM_PASSWD}" -f ~/ldapldif/base.ldif
 
 echo "dn: uid=doej,ou=Users,$SLAPD_OLCSUFFIX" > ~/ldapldif/doej.ldif
 echo "objectClass: top" >> ~/ldapldif/doej.ldif
@@ -93,19 +93,19 @@ echo "gidNumber: 100" >> ~/ldapldif/doej.ldif
 echo "homeDirectory: /home/doej" >> ~/ldapldif/doej.ldif
 echo "loginShell: /bin/bash" >> ~/ldapldif/doej.ldif
 echo "gecos: John Doe" >> ~/ldapldif/doej.ldif
-echo "userPassword: {crypt}jjoe" >> ~/ldapldif/doej.ldif
+echo "userPassword: {crypt}jdoe" >> ~/ldapldif/doej.ldif
 echo "shadowLastChange: 17058" >> ~/ldapldif/doej.ldif
 echo "shadowMin: 0" >> ~/ldapldif/doej.ldif
 echo "shadowMax: 99999" >> ~/ldapldif/doej.ldif
 echo "shadowWarning: 7" >> ~/ldapldif/doej.ldif
 
-ldapadd -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -f ~/ldapldif/doej.ldif
+ldapadd -x -D "$SLAPD_OLCROOTDN" -w "${LDAPADM_PASSWD}" -f ~/ldapldif/doej.ldif
 
-${LDAPADM_PASSWD} -s jjoe -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -x "uid=doej,ou=Users,$SLAPD_OLCSUFFIX"
+ldappasswd -s jdoe -D "$SLAPD_OLCROOTDN" -w "${LDAPADM_PASSWD}" -x "uid=doej,ou=Users,$SLAPD_OLCSUFFIX"
 
-ldapsearch -x -cn=doej -b $SLAPD_OLCSUFFIX
+ldapsearch -x cn=doej -b $SLAPD_OLCSUFFIX
 
-#ldapdelete -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} "uid=doej,ou=Users,$SLAPD_OLCSUFFIX"
+#ldapdelete -x -D "$SLAPD_OLCROOTDN" -w "${LDAPADM_PASSWD}" "uid=doej,ou=Users,$SLAPD_OLCSUFFIX"
 
 echo "local4.* /var/log/ldap.log" >> /etc/rsyslog.conf 
 service rsyslog restart
