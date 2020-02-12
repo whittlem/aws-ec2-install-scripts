@@ -1,8 +1,14 @@
 #!/usr/bin/bash
 
+yum repolist all
+yum-config-manager --enable codeready-builder-for-rhel-8-rhui-rpms
+
 yum update -y
 yum install openldap openldap-clients -y
-yum install openldap-servers --enablerepo=codeready-builder-for-rhel-8-rhui-rpms -y
+
+yum install openldap-servers -y
+yum update --nobest
+rpm -qa | grep openldap
 
 SERVER_NAME="ldaps-rat"
 SERVER_IP=$(ifconfig eth0 | grep broadcast | awk {'print $2'})
