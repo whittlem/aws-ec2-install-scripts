@@ -1,40 +1,5 @@
 #!/usr/bin/bash
 
-yum repolist all
-yum-config-manager --enable codeready-builder-for-rhel-8-rhui-rpms
-
-yum update -y
-yum install vim git unzip wget -y
-
-dd if=/dev/zero of=/swapfile bs=128M count=32
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-swapon -s
-echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
-
-mkdir -p /opt/SP/home
-
-groupadd www
-useradd -c "WWW Run User" -d /opt/SP/home/wwwrun -s /sbin/nologin wwwrun
-usermod -a -G www wwwrun
-useradd -c "WWW Admin User" -d /opt/SP/home/wwwadm -s /bin/bash wwwadm
-usermod -a -G www wwwadm
-
-mkdir -p /var/SP/httpd
-chown wwwadm:www /var/SP
-chmod +s /var/SP
-ln -s /var/SP/httpd /var/httpd
-
-sed -i 's~PATH=$PATH:$HOME/bin~export PATH=$PATH:$HOME/bin~' ~/.bash_profile
-sed -i '/^export PATH$/d' .bash_profile
-perl -i -pe "chomp if eof" ~/.bash_profile
-echo "" >> ~/.bash_profile
-
-echo "umask 027" >> ~/.bash_profile
-echo "export EDITOR=/usr/bin/vim" >> ~/.bash_profile
-echo "" >> ~/.bash_profile
-
 rm -f ~wwwadm/.bash_profile
 cp ~/.bash_profile ~wwwadm/.bash_profile
 chmod 644 ~wwwadm/.bash_profile

@@ -88,8 +88,25 @@ ln -s /opt/SP/instantclient_12_1/libclntsh.so.12.1 /opt/SP/instantclient_12_1/li
 echo "extension=oci8.so" >> /opt/SP/php-7.3.14/etc/php.ini
 ##
 
-mv /opt/SP/php-7.3.14/etc/php-fpm.conf.default /opt/SP/php-7.3.14/etc/php-fpm.conf
-mv /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf.default /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
+rm -f /opt/SP/php-7.3.14/etc/php-fpm.conf.default
+rm -f /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf.default
+
+mkdir /opt/SP/php-7.3.14/log
+chown wwwrun:www /opt/SP/php-7.3.14/log
+chmod +s /opt/SP/php-7.3.14/log
+
+rm -f /opt/SP/php-7.3.14/etc/php.ini
+cp ~/aws-ec2-install-scripts/config/php.ini /opt/SP/php-7.3.14/etc
+chown root:root /opt/SP/php-7.3.14/etc/php.ini
+chmod 644 /opt/SP/php-7.3.14/etc/php.ini
+rm -f /opt/SP/php-7.3.14/etc/php-fpm.conf
+cp ~/aws-ec2-install-scripts/config/php-fpm.conf /opt/SP/php-7.3.14/etc
+chown root:root /opt/SP/php-7.3.14/etc/php-fpm.conf
+chmod 644 /opt/SP/php-7.3.14/etc/php-fpm.conf
+rm -f /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
+cp ~/aws-ec2-install-scripts/config/www.conf /opt/SP/php-7.3.14/etc/php-fpm.d
+chown root:root /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
+chmod 644 /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
 
 cp ~/aws-ec2-install-scripts/assets/services/php /etc/init.d
 chown root:root /etc/init.d/php
