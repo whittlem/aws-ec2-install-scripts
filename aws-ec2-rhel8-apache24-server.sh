@@ -1,4 +1,4 @@
-#/bin/bash
+#!/usr/bin/bash
 
 yum update -y
 yum install gcc make -y

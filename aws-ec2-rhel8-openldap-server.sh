@@ -1,14 +1,16 @@
+#!/usr/bin/bash
+
 yum update -y
 yum install openldap openldap-clients -y
 yum install openldap-servers --enablerepo=codeready-builder-for-rhel-8-rhui-rpms -y
 
-SERVER_NAME=ldapserver1
+SERVER_NAME=ldaps-rat
 SERVER_IP=$(ifconfig eth0 | grep broadcast | awk {'print $2'})
-SERVER_DOMAIN=ldaplab.local
-LDAPADM_PASSWD=ldapadmpasswd
+SERVER_DOMAIN=internal.sytelreply.com
+LDAPADM_PASSWD=AmStLnJZOG94TlwqCLho
 SLAPD_PASSWD=$(slappasswd -h {SSHA} -s ${LDAPADM_PASSWD})
-SLAPD_ROOTNAME="ldaplab"
-SLAPD_OLCSUFFIX="dc=$SLAPD_ROOTNAME,dc=com"
+SLAPD_ROOTNAME="sytelreply"
+SLAPD_OLCSUFFIX="dc=internal,dc=$SLAPD_ROOTNAME,dc=com"
 SLAPD_OLCROOTDN="cn=ldapadm,$SLAPD_OLCSUFFIX"
 
 echo "$SERVER_IP   $SERVER_NAME.$SERVER_DOMAIN $SERVER_NAME" >> /etc/hosts
