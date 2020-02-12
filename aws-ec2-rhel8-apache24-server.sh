@@ -88,9 +88,6 @@ sed -i 's~^#LoadModule proxy_http_module modules/mod_proxy_http.so~LoadModule pr
 sed -i 's~^#LoadModule proxy_module modules/mod_proxy.so~LoadModule proxy_module modules/mod_proxy.so~' /opt/SP/apache-2.4/conf/httpd.conf
 sed -i 's~/opt/apache-2.4/htdocs~/var/SP/httpd/htdocs~g' /opt/SP/apache-2.4/conf/httpd.conf
 
-sed -i 's~PATH=$PATH:$HOME/bin~export PATH=$PATH:$HOME/bin~' ~/.bash_profile
-sed -i '/^export PATH$/d' .bash_profile
-perl -i -pe "chomp if eof" ~/.bash_profile
 echo 'export PATH=$PATH:/opt/SP/apache/bin' >> ~/.bash_profile
 
 chown -R wwwadm:www /opt/SP/apache-2.4
@@ -113,3 +110,8 @@ echo "" >> /etc/sudoers
 echo "%www    ALL=(ALL)       NOPASSWD:/usr/sbin/service" >> /etc/sudoers
 
 yum remove gcc make openldap-devel openssl-devel pcre-devel zlib-devel -y
+
+rm -f ~wwwadm/.bash_profile
+cp ~/.bash_profile ~wwwadm/.bash_profile
+chmod 644 ~wwwadm/.bash_profile
+chown wwwadm:wwwadm ~wwwadm/.bash_profile

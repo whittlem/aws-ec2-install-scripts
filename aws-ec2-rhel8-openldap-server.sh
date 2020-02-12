@@ -109,3 +109,13 @@ ldapsearch -x cn=doej -b $SLAPD_OLCSUFFIX
 
 echo "local4.* /var/log/ldap.log" >> /etc/rsyslog.conf 
 service rsyslog restart
+
+rm -f ~wwwadm/.bash_profile
+cp ~/.bash_profile ~wwwadm/.bash_profile
+chmod 644 ~wwwadm/.bash_profile
+chown wwwadm:wwwadm ~wwwadm/.bash_profile
+
+rm -f ~oracle/.bash_profile
+cp ~/.bash_profile ~oracle/.bash_profile
+chmod 644 ~oracle/.bash_profile
+chown oracle:oracle ~oracle/.bash_profile

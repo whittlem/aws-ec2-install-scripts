@@ -100,3 +100,8 @@ service php start
 netstat -antup | grep -i 9000
 
 yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel -y
+
+rm -f ~wwwadm/.bash_profile
+cp ~/.bash_profile ~wwwadm/.bash_profile
+chmod 644 ~wwwadm/.bash_profile
+chown wwwadm:wwwadm ~wwwadm/.bash_profile
