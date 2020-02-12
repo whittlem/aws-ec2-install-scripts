@@ -15,8 +15,9 @@ SERVER_IP=$(ifconfig eth0 | grep broadcast | awk {'print $2'})
 SERVER_DOMAIN="internal.sytelreply.com"
 LDAPADM_PASSWD="AmStLnJZOG94TlwqCLho"
 SLAPD_PASSWD=$(slappasswd -h {SSHA} -s ${LDAPADM_PASSWD})
+SLAPD_BASENAME="internal"
 SLAPD_ROOTNAME="sytelreply"
-SLAPD_OLCSUFFIX="dc=internal,dc=$SLAPD_ROOTNAME,dc=com"
+SLAPD_OLCSUFFIX="dc=$SLAPD_BASENAME,dc=$SLAPD_ROOTNAME,dc=com"
 SLAPD_OLCROOTDN="cn=ldapadm,$SLAPD_OLCSUFFIX"
 
 echo "$SERVER_IP   $SERVER_NAME.$SERVER_DOMAIN $SERVER_NAME" >> /etc/hosts
@@ -61,7 +62,7 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 
 echo "dn: $SLAPD_OLCSUFFIX" > ~/ldapldif/base.ldif
-echo "dc: $SLAPD_ROOTNAME" >> ~/ldapldif/base.ldif
+echo "dc: $SLAPD_BASENAME" >> ~/ldapldif/base.ldif
 echo "objectClass: top" >> ~/ldapldif/base.ldif
 echo "objectClass: domain" >> ~/ldapldif/base.ldif
 echo "" >> ~/ldapldif/base.ldif
