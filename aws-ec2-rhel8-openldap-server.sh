@@ -4,10 +4,10 @@ yum update -y
 yum install openldap openldap-clients -y
 yum install openldap-servers --enablerepo=codeready-builder-for-rhel-8-rhui-rpms -y
 
-SERVER_NAME=ldaps-rat
+SERVER_NAME="ldaps-rat"
 SERVER_IP=$(ifconfig eth0 | grep broadcast | awk {'print $2'})
-SERVER_DOMAIN=internal.sytelreply.com
-LDAPADM_PASSWD=AmStLnJZOG94TlwqCLho
+SERVER_DOMAIN="internal.sytelreply.com"
+LDAPADM_PASSWD="AmStLnJZOG94TlwqCLho"
 SLAPD_PASSWD=$(slappasswd -h {SSHA} -s ${LDAPADM_PASSWD})
 SLAPD_ROOTNAME="sytelreply"
 SLAPD_OLCSUFFIX="dc=internal,dc=$SLAPD_ROOTNAME,dc=com"
@@ -38,14 +38,14 @@ echo "changetype: modify" >> ~/ldapldif/db.ldif
 echo "replace: olcRootPW" >> ~/ldapldif/db.ldif
 echo "olcRootPW: $SLAPD_PASSWD" >> ~/ldapldif/db.ldif
 
-ldapmodify -Y EXTERNAL -H ldapi:/// -f db.ldif
+ldapmodify -Y EXTERNAL -H ldapi:/// -f ~/ldapldif/db.ldif
 
 echo "dn: olcDatabase={1}monitor,cn=config" > ~/ldapldif/monitor.ldif
 echo "changetype: modify" >> ~/ldapldif/monitor.ldif
 echo "replace: olcAccess" >> ~/ldapldif/monitor.ldif
 echo "olcAccess: {0}to * by dn.base=\"gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth\" read by dn.base=\"$SLAPD_OLCROOTDN\" read by * none" >> ~/ldapldif/monitor.ldif
 
-ldapmodify -Y EXTERNAL -H ldapi:/// -f monitor.ldif
+ldapmodify -Y EXTERNAL -H ldapi:/// -f ~/ldapldif/monitor.ldif
 
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
 chown ldap:ldap /var/lib/ldap/*
@@ -72,7 +72,7 @@ echo "dn: ou=ServiceAccounts,$SLAPD_OLCSUFFIX" >> ~/ldapldif/base.ldif
 echo "objectClass: organizationalUnit" >> ~/ldapldif/base.ldif
 echo "ou: ServiceAccounts" >> ~/ldapldif/base.ldif
 
-ldapadd -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -f base.ldif
+ldapadd -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -f ~/ldapldif/base.ldif
 
 echo "dn: uid=doej,ou=Users,$SLAPD_OLCSUFFIX" > ~/ldapldif/doej.ldif
 echo "objectClass: top" >> ~/ldapldif/doej.ldif
@@ -92,7 +92,7 @@ echo "shadowMin: 0" >> ~/ldapldif/doej.ldif
 echo "shadowMax: 99999" >> ~/ldapldif/doej.ldif
 echo "shadowWarning: 7" >> ~/ldapldif/doej.ldif
 
-ldapadd -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -f doej.ldif
+ldapadd -x -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -f ~/ldapldif/doej.ldif
 
 ${LDAPADM_PASSWD} -s jjoe -D "$SLAPD_OLCROOTDN" -w ${LDAPADM_PASSWD} -x "uid=doej,ou=Users,$SLAPD_OLCSUFFIX"
 
