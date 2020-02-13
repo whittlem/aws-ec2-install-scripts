@@ -111,6 +111,12 @@ echo "%www    ALL=(ALL)       NOPASSWD:/usr/sbin/service" >> /etc/sudoers
 
 yum remove gcc make openldap-devel openssl-devel pcre-devel zlib-devel -y
 
+rm -f /root/apr-1.7.0.tar.gz
+rm -f /root/apr-util-1.6.1.tar.gz
+rm -f /root/expat-2.2.9.tar.gz
+rm -f /root/httpd-2.4.41.tar.gz
+rm -f /root/nghttp2-1.40.0.tar.gz
+
 rm -f ~wwwadm/.bash_profile
 cp ~/.bash_profile ~wwwadm/.bash_profile
 chmod 644 ~wwwadm/.bash_profile

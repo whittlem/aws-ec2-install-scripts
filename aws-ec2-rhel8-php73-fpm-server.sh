@@ -47,7 +47,7 @@ echo 'export PATH=$PATH:/opt/SP/bison' >> ~/.bash_profile
 cd ~
 source .bash_profile
 
-yum install autoconf bzip2-devel curl-devel libpng-devel libzip-devel libzip libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel -y
+yum install autoconf bzip2-devel curl-devel libaio-level libpng-devel libzip-devel libzip libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel -y
 
 cd ~
 wget https://www.php.net/distributions/php-7.3.14.tar.gz
@@ -117,6 +117,11 @@ service php start
 netstat -antup | grep -i 9000
 
 yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel -y
+
+rm -f /root/cmake-3.13.3.tar.gz;
+rm -f /root/php-7.3.14.tar.gz;
+rm -f /root/re2c-1.1.1.tar.gz;
+rm -f /root/libzip-1.5.1.tar.xz;
 
 rm -f ~wwwadm/.bash_profile
 cp ~/.bash_profile ~wwwadm/.bash_profile
