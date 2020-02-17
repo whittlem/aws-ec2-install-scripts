@@ -17,14 +17,16 @@ mkdir -p /opt/SP/home
 
 groupadd www
 useradd -c "WWW Run User" -d /opt/SP/home/wwwrun -s /sbin/nologin -g www wwwrun
-usermod -a -G www wwwrun
+usermod -a -g www wwwrun
 useradd -c "WWW Admin User" -d /opt/SP/home/wwwadm -s /bin/bash -g www wwwadm
-usermod -a -G www wwwadm
+usermod -a -g www wwwadm
 
-mkdir -p /var/SP/httpd
-chown wwwadm:www /var/SP
+mkdir /var/httpd
+mkdir /var/SP
+ln -s /var/httpd /var/SP/httpd
+chown -R wwwadm:www /var/SP
 chmod +s /var/SP
-ln -s /var/SP/httpd /var/httpd
+chmod g+s /var/SP
 
 sed -i 's~PATH=$PATH:$HOME/bin~export PATH=$PATH:$HOME/bin~' ~/.bash_profile
 sed -i '/^export PATH$/d' .bash_profile
