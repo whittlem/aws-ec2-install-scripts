@@ -120,4 +120,4 @@ rm -f /root/nghttp2-1.40.0.tar.gz
 rm -f ~wwwadm/.bash_profile
 cp ~/.bash_profile ~wwwadm/.bash_profile
 chmod 644 ~wwwadm/.bash_profile
-chown wwwadm:wwwadm ~wwwadm/.bash_profile
+chown wwwadm:www ~wwwadm/.bash_profile
