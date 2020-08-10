@@ -17,9 +17,9 @@ mkdir -p /opt/SP/home
 
 groupadd www
 useradd -c "WWW Run User" -d /opt/SP/home/wwwrun -s /sbin/nologin -g www wwwrun
-usermod -a -g www wwwrun
+usermod -a -G www wwwrun
 useradd -c "WWW Admin User" -d /opt/SP/home/wwwadm -s /bin/bash -g www wwwadm
-usermod -a -g www wwwadm
+usermod -a -G www wwwadm
 
 mkdir /var/httpd
 mkdir /var/SP
