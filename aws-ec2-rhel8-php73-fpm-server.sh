@@ -36,6 +36,8 @@ make && make test && make install
 echo "/usr/local/lib64" >> /etc/ld.so.conf
 ldconfig
 
+yum install libaio-level -y
+
 cd ~
 wget https://ftp.gnu.org/gnu/bison/bison-3.5.tar.gz
 tar -zxvf bison-3.5.tar.gz 
