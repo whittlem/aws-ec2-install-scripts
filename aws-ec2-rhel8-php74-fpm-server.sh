@@ -66,7 +66,6 @@ cd php-7.4.9
 --with-openssl \
 --with-ldap \
 --with-libdir=lib64 \
---with-oci8=shared,instantclient,/opt/SP/instantclient \
 --enable-mbstring \
 --enable-sockets \
 --enable-bcmath \
