@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 yum update -y
-yum install gcc gcc-c++ make python3-docutils php-pear -y
+yum install gcc gcc-c++ make python3-docutils -y
 
 cd ~
 wget https://github.com/skvadrik/re2c/releases/download/1.1.1/re2c-1.1.1.tar.gz
