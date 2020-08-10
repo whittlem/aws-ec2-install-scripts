@@ -49,7 +49,7 @@ echo 'export PATH=$PATH:/opt/SP/bison' >> ~/.bash_profile
 cd ~
 source .bash_profile
 
-yum install autoconf bzip2-devel curl-devel libaio-level libpng-devel libzip-devel libzip libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel -y
+yum install autoconf bzip2-devel curl-devel libpng-devel libzip-devel libzip libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel -y
 
 cd ~
 wget https://www.php.net/distributions/php-7.3.14.tar.gz
