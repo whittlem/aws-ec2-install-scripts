@@ -45,7 +45,7 @@ cd bison-3.5
 ./configure --prefix=/opt/SP/bison-3.5
 make clean && make && make install
 ln -s /opt/SP/bison-3.5 /opt/SP/bison
-echo 'export PATH=$PATH:/opt/SP/bison' >> ~/.bash_profile
+echo 'export PATH=$PATH:/opt/SP/bison/bin' >> ~/.bash_profile
 cd ~
 source .bash_profile
 
