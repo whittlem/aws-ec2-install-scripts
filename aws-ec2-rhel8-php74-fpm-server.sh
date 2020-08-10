@@ -82,11 +82,11 @@ cd ~
 source .bash_profile
 
 ## ORACLE ###
-cd /opt/SP/php-7.3.14/bin
+cd /opt/SP/php-7.4.9/bin
 ./pecl channel-update pecl.php.net
 printf "instantclient,/opt/SP/instantclient_12_1\n" | ./pecl install oci8-2.2.0
 ln -s /opt/SP/instantclient_12_1/libclntsh.so.12.1 /opt/SP/instantclient_12_1/libclntsh.so
-echo "extension=oci8.so" >> /opt/SP/php-7.3.14/etc/php.ini
+echo "extension=oci8.so" >> /opt/SP/php-7.4.9/etc/php.ini
 ##
 
 rm -f /opt/SP/php-7.4.9/etc/php-fpm.conf.default
