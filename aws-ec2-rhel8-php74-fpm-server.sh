@@ -65,6 +65,7 @@ cd php-7.4.9
 --with-openssl \
 --with-ldap \
 --with-libdir=lib64 \
+--with-oci8=shared,instantclient,/opt/SP/instantclient \
 --enable-mbstring \
 --enable-sockets \
 --enable-bcmath \
@@ -79,14 +80,6 @@ echo 'export PHP_HOME=/opt/SP/php7' >> ~/.bash_profile
 echo 'export PHP_INI_SCAN_DIR=/opt/SP/php7/etc' >> ~/.bash_profile
 cd ~
 source .bash_profile
-
-## ORACLE ###
-cd /opt/SP/php-7.4.9/bin
-./pecl channel-update pecl.php.net
-printf "instantclient,/opt/SP/instantclient_12_1\n" | ./pecl install oci8-2.2.0
-ln -s /opt/SP/instantclient_12_1/libclntsh.so.12.1 /opt/SP/instantclient_12_1/libclntsh.so
-echo "extension=oci8.so" >> /opt/SP/php-7.4.9/etc/php.ini
-##
 
 rm -f /opt/SP/php-7.4.9/etc/php-fpm.conf.default
 rm -f /opt/SP/php-7.4.9/etc/php-fpm.d/www.conf.default
