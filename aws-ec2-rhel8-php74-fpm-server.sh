@@ -36,7 +36,7 @@ make && make test && make install
 echo "/usr/local/lib64" >> /etc/ld.so.conf
 ldconfig
 
-yum install libaio-level m4 -y
+yum install libaio-devel m4 -y
 
 cd ~
 wget https://ftp.gnu.org/gnu/bison/bison-3.5.tar.gz
@@ -58,6 +58,7 @@ cd php-7.4.9
 ./buildconf --force
 ./configure --prefix=/opt/SP/php-7.4.9 \
 --enable-fpm \
+--with-pear \
 --with-fpm-systemd \
 --with-zlib \
 --with-bz2 \
@@ -117,7 +118,7 @@ service php start
 
 netstat -antup | grep -i 9000
 
-yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel sqlite-devel oniguruma-devel -y
+yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel libaio-devel sqlite-devel oniguruma-devel -y
 
 rm -f /root/cmake-3.13.3.tar.gz;
 rm -f /root/php-7.4.9.tar.gz;
