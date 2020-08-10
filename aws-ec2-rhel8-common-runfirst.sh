@@ -16,10 +16,15 @@ echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 mkdir -p /opt/SP/home
 
 groupadd www
+groupadd wwwadm
+groupadd wwwrun
+
 useradd -c "WWW Run User" -d /opt/SP/home/wwwrun -s /sbin/nologin -g www wwwrun
 usermod -a -G www wwwrun
+usermod -a -G wwwrun wwwrun
 useradd -c "WWW Admin User" -d /opt/SP/home/wwwadm -s /bin/bash -g www wwwadm
 usermod -a -G www wwwadm
+usermod -a -G wwwadm wwwadm
 
 mkdir /var/httpd
 mkdir /var/SP
