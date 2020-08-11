@@ -34,7 +34,7 @@ chmod +s /var/SP
 chmod g+s /var/SP
 
 sed -i 's~PATH=$PATH:$HOME/bin~export PATH=$PATH:$HOME/bin~' ~/.bash_profile
-sed -i '/^export PATH$/d' .bash_profile
+sed -i '/^export PATH$/d' ~/.bash_profile
 perl -i -pe "chomp if eof" ~/.bash_profile
 echo "" >> ~/.bash_profile
 
