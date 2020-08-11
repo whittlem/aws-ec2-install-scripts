@@ -36,7 +36,7 @@ make && make test && make install
 echo "/usr/local/lib64" >> /etc/ld.so.conf
 ldconfig
 
-yum install libaio-level m4 -y
+yum install libaio-devel m4 -y
 
 cd ~
 wget https://ftp.gnu.org/gnu/bison/bison-3.5.tar.gz
@@ -52,11 +52,11 @@ source .bash_profile
 yum install autoconf bzip2-devel curl-devel libpng-devel libzip-devel libzip libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel -y
 
 cd ~
-wget https://www.php.net/distributions/php-7.3.14.tar.gz
-tar -zxvf php-7.3.14.tar.gz
+wget https://www.php.net/distributions/php-7.3.21.tar.gz
+tar -zxvf php-7.3.21.tar.gz
 cd php-7.3.14
 ./buildconf --force
-./configure --prefix=/opt/SP/php-7.3.14 \
+./configure --prefix=/opt/SP/php-7.3.21 \
 --enable-fpm \
 --with-fpm-systemd \
 --enable-zip \
@@ -73,7 +73,7 @@ cd php-7.3.14
 --quiet
 make clean && make && make install
 
-ln -s /opt/SP/php-7.3.14 /opt/SP/php7
+ln -s /opt/SP/php-7.3.21 /opt/SP/php7
 
 echo 'export PATH=$PATH:/opt/SP/php7/bin' >> ~/.bash_profile
 echo 'export PATH=$PATH:/opt/SP/php7/bin' >> ~/.bash_profile
@@ -83,7 +83,7 @@ cd ~
 source .bash_profile
 
 ## ORACLE ###
-cd /opt/SP/php-7.3.14/bin
+cd /opt/SP/php-7.3.21/bin
 ./pecl channel-update pecl.php.net
 printf "instantclient,/opt/SP/instantclient_12_1\n" | ./pecl install oci8-2.2.0
 ln -s /opt/SP/instantclient_12_1/libclntsh.so.12.1 /opt/SP/instantclient_12_1/libclntsh.so
