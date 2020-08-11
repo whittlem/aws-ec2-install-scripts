@@ -54,7 +54,7 @@ yum install autoconf bzip2-devel curl-devel libpng-devel libzip-devel libzip lib
 cd ~
 wget https://www.php.net/distributions/php-7.3.21.tar.gz
 tar -zxvf php-7.3.21.tar.gz
-cd php-7.3.14
+cd php-7.3.21
 ./buildconf --force
 ./configure --prefix=/opt/SP/php-7.3.21 \
 --enable-fpm \
@@ -87,28 +87,28 @@ cd /opt/SP/php-7.3.21/bin
 ./pecl channel-update pecl.php.net
 printf "instantclient,/opt/SP/instantclient_12_1\n" | ./pecl install oci8-2.2.0
 ln -s /opt/SP/instantclient_12_1/libclntsh.so.12.1 /opt/SP/instantclient_12_1/libclntsh.so
-echo "extension=oci8.so" >> /opt/SP/php-7.3.14/etc/php.ini
+echo "extension=oci8.so" >> /opt/SP/php-7.3.21/etc/php.ini
 ##
 
-rm -f /opt/SP/php-7.3.14/etc/php-fpm.conf.default
-rm -f /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf.default
+rm -f /opt/SP/php-7.3.21/etc/php-fpm.conf.default
+rm -f /opt/SP/php-7.3.21/etc/php-fpm.d/www.conf.default
 
-mkdir /opt/SP/php-7.3.14/log
-chown wwwrun:www /opt/SP/php-7.3.14/log
-chmod +s /opt/SP/php-7.3.14/log
+mkdir /opt/SP/php-7.3.21/log
+chown wwwrun:www /opt/SP/php-7.3.21/log
+chmod +s /opt/SP/php-7.3.21/log
 
-rm -f /opt/SP/php-7.3.14/etc/php.ini
-cp ~/aws-ec2-install-scripts/config/php.ini /opt/SP/php-7.3.14/etc
-chown root:root /opt/SP/php-7.3.14/etc/php.ini
-chmod 644 /opt/SP/php-7.3.14/etc/php.ini
-rm -f /opt/SP/php-7.3.14/etc/php-fpm.conf
-cp ~/aws-ec2-install-scripts/config/php-fpm.conf /opt/SP/php-7.3.14/etc
-chown root:root /opt/SP/php-7.3.14/etc/php-fpm.conf
-chmod 644 /opt/SP/php-7.3.14/etc/php-fpm.conf
-rm -f /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
-cp ~/aws-ec2-install-scripts/config/www.conf /opt/SP/php-7.3.14/etc/php-fpm.d
-chown root:root /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
-chmod 644 /opt/SP/php-7.3.14/etc/php-fpm.d/www.conf
+rm -f /opt/SP/php-7.3.21/etc/php.ini
+cp ~/aws-ec2-install-scripts/config/php.ini /opt/SP/php-7.3.21/etc
+chown root:root /opt/SP/php-7.3.21/etc/php.ini
+chmod 644 /opt/SP/php-7.3.21/etc/php.ini
+rm -f /opt/SP/php-7.3.21/etc/php-fpm.conf
+cp ~/aws-ec2-install-scripts/config/php-fpm.conf /opt/SP/php-7.3.21/etc
+chown root:root /opt/SP/php-7.3.21/etc/php-fpm.conf
+chmod 644 /opt/SP/php-7.3.21/etc/php-fpm.conf
+rm -f /opt/SP/php-7.3.21/etc/php-fpm.d/www.conf
+cp ~/aws-ec2-install-scripts/config/www.conf /opt/SP/php-7.3.21/etc/php-fpm.d
+chown root:root /opt/SP/php-7.3.21/etc/php-fpm.d/www.conf
+chmod 644 /opt/SP/php-7.3.21/etc/php-fpm.d/www.conf
 
 cp ~/aws-ec2-install-scripts/assets/services/php /etc/init.d
 chown root:root /etc/init.d/php
@@ -121,7 +121,7 @@ netstat -antup | grep -i 9000
 #yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel -y
 
 rm -f /root/cmake-3.13.3.tar.gz;
-rm -f /root/php-7.3.14.tar.gz;
+rm -f /root/php-7.3.21.tar.gz;
 rm -f /root/re2c-1.1.1.tar.gz;
 rm -f /root/libzip-1.5.1.tar.xz;
 
