@@ -118,7 +118,7 @@ service php start
 
 netstat -antup | grep -i 9000
 
-yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel -y
+#yum remove gcc gcc-c++ make python3-docutils bzip2-devel curl-devel libpng-devel libzip-devel libxml2-devel openldap-devel gnutls-devel libicu-devel openssl-devel systemd-devel zlib-devel -y
 
 rm -f /root/cmake-3.13.3.tar.gz;
 rm -f /root/php-7.3.14.tar.gz;
