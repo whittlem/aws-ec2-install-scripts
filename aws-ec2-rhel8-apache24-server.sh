@@ -54,9 +54,9 @@ yum install openssl-devel pcre-devel zlib-devel -y
 
 # https://httpd.apache.org/download.cgi#apache24
 cd ~
-wget http://apache.mirror.anlx.net//httpd/httpd-2.4.41.tar.gz
-tar -zxvf httpd-2.4.41.tar.gz
-cd httpd-2.4.41
+wget http://apache.mirror.anlx.net/httpd/httpd-2.4.46.tar.gz
+tar -zxvf httpd-2.4.46.tar.gz
+cd httpd-2.4.46
 ./configure --prefix=/opt/apache-2.4 \
 --with-apr=/opt/SP/apr-1.7.0 \
 --with-apr-util=/opt/SP/apr-util-1.6.1 \
@@ -114,7 +114,7 @@ yum remove gcc make openldap-devel openssl-devel pcre-devel zlib-devel -y
 rm -f /root/apr-1.7.0.tar.gz
 rm -f /root/apr-util-1.6.1.tar.gz
 rm -f /root/expat-2.2.9.tar.gz
-rm -f /root/httpd-2.4.41.tar.gz
+rm -f /root/httpd-2.4.46.tar.gz
 rm -f /root/nghttp2-1.40.0.tar.gz
 
 rm -f ~wwwadm/.bash_profile
